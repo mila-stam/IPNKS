@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+  <a href="#" onmouseover="green()" onmouseout="normal()">[On mouse over here bold words of the following paragraph will be highlighted]</a>
+
+  <p><strong>We</strong> have just started <strong>this</strong> section for the users (<strong>beginner</strong>
+    to intermediate) who <strong>want</strong> to work with <strong>various</strong> JavaScript <strong>problems</strong>
+      and write scripts online to <strong>test</strong> their JavaScript <strong>skill</strong>.
+  </p>
+
+<script>
+    var boldItems
+    window.onload = getBoldItems;
+    function getBoldItems(){
+        boldItems = document.getElementsByTagName("strong")
+    }
+  function green(){
+        for (let i=0; i<boldItems.length; i++){
+            boldItems[i].style.color = "red";
+        }
+  }
+  function normal(){
+      for (let i=0; i<boldItems.length; i++){
+          boldItems[i].style.color = "black";
+      }
+  }
+</script>
+</body>
+</html>

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <style>
+    label{
+        display: block;
+    }
+  </style>
+</head>
+<body>
+<p>Input radius value and get the volume of a sphere</p>
+<div id="form">
+  <label>
+    Radius
+    <input type="text" id="radius">
+  </label>
+
+  <label>
+    Volume
+    <input type="text" id="volume">
+  </label>
+
+  <input type="button" value="calculate" onclick="calculate()">
+</div>
+
+
+<script>
+  function calculate(){
+      let radius = document.getElementById("radius").value;
+      radius = Math.abs(radius);
+      let volume = (4/3) * Math.PI * Math.pow(radius, 3);
+      volume = volume.toFixed(4);
+      document.getElementById('volume').value = volume;
+  }
+</script>
+</body>
+</html>

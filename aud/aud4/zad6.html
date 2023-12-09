@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<script>
+  function shorten_string(main_string, pos, replace){
+      if(typeof (pos) == "undefined"){
+          return main_string
+      }
+      if (typeof (replace) == "undefined"){
+          return main_string.slice(0, pos) + '...';
+      }
+      return main_string.slice(0, pos) + replace;
+  }
+
+  console.log(shorten_string("We are doing JS string exercises."))
+
+  console.log(shorten_string("We are doing JS string exercises", 19));
+
+  console.log(shorten_string("We are doing JS string exercises", 15, "!!!"))
+</script>
+</body>
+</html>

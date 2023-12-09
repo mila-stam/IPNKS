@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+
+<p>
+  <a id="finki" type="text/html" hreflang="en-us" rel="nofollow" target="self" href="http://www.w3resource.com/">
+    finki
+  </a>
+</p>
+
+<input type="button" onclick="getAttributes()" value="Click here to get attributes value">
+
+<script>
+    function getAttributes(){
+        let type = document.getElementById("finki").type;
+        let hreflang = document.getElementById("finki").hreflang;
+        let rel = document.getElementById("finki").rel;
+        let target = document.getElementById("finki").target;
+        let href = document.getElementById("finki").href;
+        console.log(type + " " + hreflang + " " + rel + " " + target + " " + href);
+
+    }
+
+</script>
+</body>
+</html>

@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <style>
+      #add{
+          width: 200px;
+      }
+      th{
+          border: solid 2px black;
+          padding: 10px;
+
+      }
+      tbody td{
+          border: solid 2px black;
+      }
+      table{
+          border-collapse: collapse;
+      }
+  </style>
+</head>
+<body>
+<h1>Projects details</h1>
+<div>
+  <label>Author</label>
+  <input type="text" id="author">
+</div>
+
+<div>
+  <label>Project</label>
+  <input type="text" id="project">
+</div>
+
+<div>
+  <label>Cost</label>
+  <input type="text" id="cost">
+</div>
+
+<input type="button" value="ADD" id="add" onclick="add()">
+
+<h2>Project list - Total cost: <span id="total">0</span></h2>
+
+<table id="table">
+  <thead>
+  <th>Author</th>
+  <th>Project</th>
+  <th colspan="2">Cost</th>
+  </thead>
+
+  <tbody>
+
+  </tbody>
+</table>
+
+<script>
+    function add(){
+        let tempRow = document.getElementById("table").getElementsByTagName("tbody")[0]  //se zema nultiot element od site vo nizata tbody
+
+        let author = document.getElementById("author").value  //se zema vneseniot avtor
+        let project = document.getElementById("project").value  //se zema vneseniot proekt
+        let cost = document.getElementById("cost").value  //se zema vnesenata cena
+
+
+        if(author === '' || project === '' || cost===''){ //se proveruva dali site polinja se vneseni
+            alert("Fill everythnig")
+            return;
+        }
+
+        let newRow = tempRow.insertRow(tempRow.rows.length);  //se vnesuva nov red vo tempRow
+
+        let authorCell = newRow.insertCell(0)  //se kreiraat novi kjelii na soodvetnite pozicii od redot
+        let projectCell = newRow.insertCell(1);
+        let costCell = newRow.insertCell(2)
+        let removeCell = newRow.insertCell(3)
+
+
+        removeCell.innerHTML = "<button onclick='removeRow(this)'>Remove</button>" //vo soodvetnata kejlija e kreira kopche
+        authorCell.innerHTML = author  //se vnesuvaat vrednostite vo kjeliite
+        projectCell.innerHTML = project
+        costCell.innerHTML = cost
+        costCell.setAttribute('class', 'cost'); //na kjelijata so cenata i se dava atribut (class)
+
+
+        document.getElementById("author").value = "";  //se resetiraat mestata za input sekoj pat
+        document.getElementById("project").value = "";
+        document.getElementById("cost").value = "";
+
+        sumProjects() //se povikuva funkcijata za suma
+    }
+
+
+    function sumProjects(){
+        /*let sum = document.getElementById("total").innerHTML
+        sum = parseInt(sum) + parseInt(cost)
+        document.getElementById("total").innerHTML = sum*/  /*ako ne treba da se odzema od sumata*/
+
+        let currSumArray = document.getElementsByClassName('cost')  //se zimaat site kjelii koi imaat klasa cost
+        let sum = 0
+        for (let i=0; i<currSumArray.length; i++){
+            sum += parseInt(currSumArray[i].innerHTML);
+        }
+        document.getElementById('total').innerHTML = sum  //se menuva vrednosta na sumata
+
+    }
+
+    function removeRow(x){
+        let temp = x.parentNode.parentNode;
+        temp.parentNode.removeChild(temp);
+        sumProjects()
+    }
+
+</script>
+</body>
+</html>

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<div>
+  <label>Number of elements</label>
+  <input type="text" id="num">
+</div>
+
+<div>
+  <label>Type</label>
+  <select id="vid">
+    <option value="checkbox">checkbox</option>
+    <option value="radio">radio</option>
+  </select>
+</div>
+
+<input type="button" value="add" id="button" onclick="add_1()">
+
+<div id="box">
+
+</div>
+
+<script>
+    function add_1() {
+        let n = document.getElementById("num").value       //kolku elemeti da se sozdadat
+        n = parseInt(n)
+
+        let kind = document.getElementById("vid").value    //od koj vid da bidat elementite (checkbox/radio)
+
+        let container = document.getElementById("box");     //se pristapuva prazniot div kade shto kje se pishuvaat elementite
+        container.innerHTML = "";                           //sekoj pat koga se povikuva funkcijata se brishat prethodno postavenite elementi
+
+
+        for (let i=0; i<n; i++){
+                let element = document.createElement("input") //kreirame element shto e od tipot <input>
+                element.setAttribute('type', kind)            //na toj element mu davame atribut type so vrednosta koja e zachuvana vo promenlivata kind
+                                                              //<input type="kind"
+
+            let broj = document.createTextNode(i)              //kreirame tekstualno pole vo koe kje bide vrednosta od i
+
+                container.appendChild(element)                //na sekoe vrtenje od ciklusot vo (na pochetokot) porazen div se dodava promenlivata element
+                container.appendChild(broj)                   //se dodava promenlivata broj
+
+        }
+    }
+</script>
+</body>
+</html>

@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+    <script>
+      var broj = prompt("Vnesete broj");
+      broj = parseInt(broj);
+      var max = 0;
+      while (!isNaN(broj)){
+          if(broj > max){
+              max = broj;
+          }
+          broj = prompt("Vnesete broj");
+          broj = parseInt(broj);
+      }
+      //console.log("Brojot so najgolema vrednost e " + max);
+      document.write(max);
+    </script>
+</body>
+</html>

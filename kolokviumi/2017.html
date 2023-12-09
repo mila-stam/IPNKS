@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+
+  <style>
+      table {
+          border-collapse: collapse;
+      }
+
+      th, td {
+          border: 1px solid black;
+          padding: 5px;
+      }
+      #revert{
+          position: relative;
+          left: 482px;
+          top: -166px;
+      }
+  </style>
+</head>
+<body>
+<h1>Details</h1>
+
+<div>
+  <label>Name</label>
+  <input type="text" id="name">
+</div>
+
+<div>
+  <label>Index</label>
+  <input type="text" id="index">
+</div>
+
+<div>
+  <label>Phone</label>
+  <input type="text" id="phone">
+</div>
+
+<div>
+  <label>Grade</label>
+  <input type="radio" value="5" name="grade">5
+  <input type="radio" value="6" name="grade">6
+  <input type="radio" value="7" name="grade">7
+  <input type="radio" value="8" name="grade">8
+  <input type="radio" value="9" name="grade">9
+  <input type="radio" value="10" name="grade">10
+</div>
+
+<div>
+  <label>Session</label>
+  <select id="session">
+    <option value="January">January</option>
+    <option value="June">June</option>
+    <option value="September">September</option>
+  </select>
+</div>
+
+<input type="button" value="Import student" onclick="importStudent()">
+
+<div id="revert">
+  <h3>Revert History</h3>
+  <ul id="box">
+
+  </ul>
+</div>
+
+
+<h2>Students (average grade: <span id="avg_grade">0.0</span>)</h2>
+
+<table id="table">
+  <thead>
+  <th>Name</th>
+  <th>Index</th>
+  <th>Phone</th>
+  <th>Grade</th>
+  <th>Session</th>
+  <th>Actions</th>
+  </thead>
+
+  <tbody>
+
+
+  </tbody>
+</table>
+
+<script>
+    function importStudent() {
+        let tempRow = document.getElementById("table").getElementsByTagName("tbody")[0]
+
+        let name = document.getElementById("name").value
+        let index = document.getElementById("index").value
+        let phone = document.getElementById("phone").value
+        let grade = document.querySelector('input[name="grade"]:checked').value;
+        let session = document.getElementById("session").value
+
+        if (name === '' || index === '' || phone === '' || grade === '' || session === '') {
+            alert("Пополнете ги сите полиња")
+            return;
+        }
+
+        let newRow = tempRow.insertRow(tempRow.rows.length);
+
+        let nameCell = newRow.insertCell(0)
+        let indexCell = newRow.insertCell(1)
+        let phoneCell = newRow.insertCell(2)
+        let gradeCell = newRow.insertCell(3)
+        let sessionCell = newRow.insertCell(4)
+        let actionCell = newRow.insertCell(5)
+
+
+        nameCell.innerHTML = name;
+        indexCell.innerHTML = index;
+        indexCell.setAttribute('class', 'index_cell')
+        phoneCell.innerHTML = phone.slice(0, 3) + "/" + phone.slice(3, 6) + "-" + phone.slice(6)
+        gradeCell.innerHTML = grade;
+        gradeCell.setAttribute('class', 'grade_cell')
+        sessionCell.innerHTML = session;
+        actionCell.innerHTML = "<button onclick='color(this)'>Confirm</button>" + "<button onclick='remove(this)'>Revert</button>"
+
+        /*document.getElementById("name").value = "";
+        document.getElementById("index").value = "";
+        document.getElementById("phone").value = "";*/
+        avg()
+    }
+
+
+    function color(x) {
+        let temp = x.parentNode.parentNode
+        temp.style.backgroundColor = 'green'
+        //x.disabled = true //koga e edno kopche
+        temp.getElementsByTagName('button')[0].disabled = true;
+        temp.getElementsByTagName('button')[1].disabled = true;
+    }
+
+    function remove(x) {
+        let temp = x.parentNode.parentNode
+        temp.parentNode.removeChild(temp);
+
+        let box = document.getElementById("box")
+        let index = temp.querySelector('.index_cell').textContent;
+        let grade = temp.querySelector('.grade_cell').textContent;
+
+        let list_item = document.createElement("li")
+
+        list_item.textContent = `${index} - grade ${grade}`;
+        box.appendChild(list_item)
+        avg()
+    }
+
+    function avg() {
+        let currAvg = document.getElementsByClassName('grade_cell')
+        let avg = 0
+        for (let i = 0; i < currAvg.length; i++) {
+            avg += parseInt(currAvg[i].innerHTML);
+        }
+        avg = avg / currAvg.length
+        if (isNaN(avg)) {
+            document.getElementById('avg_grade').innerHTML = '0'
+        } else {
+            document.getElementById('avg_grade').innerHTML = avg
+
+        }
+    }
+</script>
+
+</body>
+</html>

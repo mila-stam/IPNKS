@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<script>
+    var a = prompt("Vnesete vrednost za a");
+    var b = prompt("Vnesete vrednost za b");
+    a = parseInt(a); //pretvara string vo broj
+    b = parseInt(b); //pretvara string vo broj
+
+    if (!isNaN(a) && !isNaN(b)){
+        if(a > b){
+            alert(a);
+        } else alert(b)
+    } else alert("ne e cel broj")
+
+</script>
+</body>
+</html>

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<script>
+    var ost0 = 0, ost1 = 0, ost2 = 0;
+    var broj = prompt("Vnesete broj");
+    broj = parseInt(broj);
+    while (!isNaN(broj)) {
+        if (broj % 3 == 0) {
+            ost0++;
+        } else if(broj % 3 == 1){
+            ost1++;
+        } else ost2++;
+
+        broj = prompt("Vnesete broj");
+        broj = parseInt(broj);
+    }
+    console.log("Vnesovte " + ost0 + " broevi koi imaat ostatok 0 pri delenje so 3");
+    console.log("Vnesovte " + ost1 + " broevi koi imaat ostatok 1 pri delenje so 3");
+    console.log("Vnesovte " + ost2 + " broevi koi imaat ostatok 2 pri delenje so 3");
+</script>
+</body>
+</html>

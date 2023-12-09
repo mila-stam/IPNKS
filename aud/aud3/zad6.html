@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<select id="mSelect">
+  <option>Red</option>
+  <option>Green</option>
+  <option>Blue</option>
+  <option>White</option>
+</select>
+
+<input type="button" onclick="getOptions()" value="Count and Output all items">
+
+<script>
+  function getOptions(){
+      let opt = document.getElementById("mSelect");
+      let text = "Number of items: ";
+      text = text + opt.length;
+      for (let i=0; i<opt.length; i++){
+          text = text + "\n" + opt.options[i].text;
+      }
+      alert(text);
+  }
+</script>
+</body>
+</html>

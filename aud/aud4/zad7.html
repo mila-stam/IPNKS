@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<script>
+  function remove_first_occ(string, substring){
+      /*let index = string.indexOf(substring);
+      if(index===-1){
+          return string;
+      }
+      return string.slice(0, index) + string.slice(index + substring.length)
+      */
+
+      return string.replace (substring, '')
+
+  }
+  console.log(remove_first_occ("The quick brown fox jumps over the lazy dog", 'the'));
+
+</script>
+</body>
+</html>

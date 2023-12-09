@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <style>
+    .bills{
+        display: inline-block;
+        width: 300px;
+        margin: 10px;
+    }
+  </style>
+</head>
+<body>
+<h1>Car insurance</h1>
+
+<div>
+  <label>Name</label>
+  <input type="text" id="name">
+</div>
+
+<div>
+  <label>Surname</label>
+  <input type="text" id="surname">
+</div>
+
+<div>
+  <label>Registration</label>
+  <input type="text" id="registration">
+</div>
+
+<div>
+  <label>Car age</label>
+  <input type="text" id="car_age">
+</div>
+
+
+<div>
+  <label>Car accidents</label>
+  <input type="radio" name="accident" value="yes">Yes
+  <input type="radio" name="accident" value="no">No
+</div>
+
+<input type="button" value="Generate bill" onclick="generate()">
+
+<h2>Bills</h2>
+
+<h5>Total bills for paying <span id="total">0</span></h5>
+
+<div id="box">
+
+</div>
+<script>
+    function generate(){
+        let name = document.getElementById("name").value
+        let surname = document.getElementById("surname").value
+        let registration = document.getElementById("registration").value
+        let car_age = document.getElementById("car_age").value
+        let car_acc = document.querySelector('input[name = "accident"]:checked').value
+
+
+        if (!name || !surname || !registration || !car_age || !car_acc){
+            alert("Fill everything")
+        }
+
+        let first_letters = registration.substring(0, 2)
+        let numbers = registration.substring(3, 7)
+        let second_letters = registration.substring(8)
+        function isLetter(char) {
+            return /^[a-zA-Z]$/.test(char);
+        }
+
+
+        if(!isLetter(first_letters[0]) ||  isLetter (first_letters[1])){
+            alert("Invalid registration input")
+            return
+        }
+        if(!isLetter (second_letters[0]) || !isLetter (second_letters[1])){
+            alert("Invalid registration input")
+            return
+        }
+        if(isNaN(parseInt(numbers[0])) || isNaN(parseInt(numbers[1])) || isNaN(parseInt(numbers[2])) || isNaN(parseInt(numbers[3]))){
+            alert("Invalid registration input")
+            return
+        }
+
+        let price = calculate_price(numbers, car_acc)
+
+        let box = document.getElementById("box")
+        //ime
+        //prezime
+        //Soobrakjajki: ima/nema
+        //starost na vozilo: godini
+        //za plakjanje
+        //plati izbrishi
+        let p1 = document.createElement("p")
+        p1.textContent = `${name} ${surname}`
+
+        let p2 = document.createElement("p")
+        p2.textContent = `${registration}`
+
+        let p3 = document.createElement("p")
+        if (car_acc === 'yes'){
+            p3.textContent = `Accidents: Has`
+        } else if (car_acc === 'no'){
+            p3.textContent = `Accidents: Doesn't have`
+        }
+
+        let p4 = document.createElement("p")
+        p4.textContent = `Car age: ${car_age}`
+
+        let p5 = document.createElement("p")
+        p5.textContent = `For paying: ${price}`
+
+        let p6 = document.createElement("p")
+        let button = document.createElement("button")
+        button.onclick = function () {pay_bill(this);};
+        button.textContent = `pay`
+        let button1 = document.createElement("button")
+        button1.onclick = function () {delete_bill(this);};
+        button1.textContent = `delete`
+        p6.append(button)
+        p6.append(button1)
+
+        let div = document.createElement("div")
+        div.append(p1)
+        div.append(p2)
+        div.append(p3)
+        div.append(p4)
+        div.append(p5)
+        div.append(p6)
+
+        div.setAttribute('class', 'bills')
+
+        if(car_age > 30){
+            div.style.backgroundColor = 'red'
+        } else{
+            div.style.backgroundColor = 'green'
+        }
+
+        box.appendChild(div)
+
+        document.getElementById("name").value = ""
+        document.getElementById("surname").value =""
+        document.getElementById("registration").value = ""
+        document.getElementById("car_age").value = ""
+
+        update_count(1)
+    }
+
+    function calculate_price(string, acc){
+        let sum = 3000
+        let i = string[0]
+        if(string[1] === i && string[2] === i && string[3] === i){
+            sum += 1000
+        }
+        if(acc === 'yes'){
+            sum += 500
+        }
+        return sum
+    }
+    function pay_bill(x){
+        let temp = x.parentNode.parentNode
+        temp.getElementsByTagName('button')[0].disabled = true
+        temp.getElementsByTagName('button')[1].disabled = true
+    }
+
+    function delete_bill(x){
+        let temp = x.parentNode.parentNode
+        temp.parentNode.removeChild(temp);
+        update_count(0)
+    }
+
+    function update_count(x){
+        let current = parseInt(document.getElementById("total").innerText)
+        if(x===1){
+            document.getElementById("total").innerHTML = current + 1
+        } else if(x===0){
+            document.getElementById("total").innerHTML = current - 1
+        }
+    }
+</script>
+</body>
+</html>

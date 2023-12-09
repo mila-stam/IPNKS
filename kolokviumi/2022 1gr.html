@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+
+  <style>
+    .divs{
+        display: inline-block;
+        width: 300px;
+        margin: 10px;
+    }
+  </style>
+</head>
+<body>
+<h1>User Cards</h1>
+
+<div>
+  <label>Username</label>
+  <input type="text" id="username">
+</div>
+
+<div>
+  <label>ID</label>
+  <input type="text" id="id">
+</div>
+
+<div>
+  <label>Width</label>
+  <input type="text" id="width">px
+</div>
+
+<div>
+  <label>Height</label>
+  <input type="text" id="height">px
+</div>
+
+<div>
+  <label>Color</label>
+  <select id="color">
+    <option>red</option>
+    <option>yellow</option>
+    <option>green</option>
+    <option>blue</option>
+  </select>
+</div>
+
+<input type="button" onclick="add_card()" id="button" value="Add">
+
+<h3>Total sold <span id="total">0</span></h3>
+
+<div id="box">
+
+</div>
+
+<script>
+    function checkID(id){
+        return /^[a-z!@#$%^&*()_+{}\[\]:;<>,.?~\\/-]$/.test(id);
+    }
+    function total_price(width, height, color){
+        let pixels = width*height;
+        let price = pixels * 0.5
+        if(color === 'red'){
+            price += 1000
+        }
+        return price;
+    }
+
+    function existing_ids(id){
+        let array = document.getElementsByClassName('ids')
+        for (let i=0; i<array.length; i++){
+            if(id === array[i].innerHTML){
+                return true
+            }
+        }
+        return false
+    }
+  function add_card(){
+      let username = document.getElementById("username").value
+      let id = document.getElementById("id").value
+      let width = document.getElementById("width").value
+      let height = document.getElementById("height").value
+      let color = document.getElementById("color").value
+
+      if(!username || !id || !width || !height || !color){
+          alert("Fill all of the text boxes")
+      }
+
+      if(checkID(id)){
+          alert("Invalid ID")
+          return
+      }
+
+      if (width>500 || height>500 || height<=0 || width<=0 || isNaN(parseInt(width)) || isNaN(parseInt(height))){
+              alert("Invalid width or height")
+              return;
+      }
+
+
+      if(existing_ids(id)){
+          update_card(id, width, height, color);
+          return
+      }
+
+      let price = total_price(width, height, color)
+      let box = document.getElementById("box")
+      //id: id
+      //width: width
+      //height: height
+      //color: color
+      //Total sum: su,
+      //button: Sell
+
+      let p1=document.createElement("p")
+      let span1_0 = document.createElement("span");
+      let span1_1 =document.createElement("span")
+      span1_0.textContent = `ID: `
+      span1_1.textContent = `${id}`
+      span1_1.setAttribute('class', 'ids');
+      p1.append(span1_0)
+      p1.append(span1_1)
+
+      let p2 = document.createElement("p")
+      p2.textContent = `Width: ${width}`
+
+      let p3 = document.createElement("p")
+      p3.textContent = `Height: ${height}`
+
+      let p4 = document.createElement("p")
+      p4.textContent = `Color: ${color}`
+
+      let p5 = document.createElement("p")
+      p5.textContent = `Toatal price: ${price}`
+      p5.setAttribute('class', 'price');
+
+      let p6 = document.createElement("p")
+      let button = document.createElement("button")
+      button.onclick = function () {sell(this);}
+      button.textContent = `Sell`
+      p6.append(button)
+
+      let div = document.createElement("div")
+      div.append(p1)
+      div.append(p2)
+      div.append(p3)
+      div.append(p4)
+      div.append(p5)
+      div.append(p6)
+
+      if(color === 'red'){
+          div.style.backgroundColor = 'red'
+      }
+      if(color === 'yellow'){
+          div.style.backgroundColor = 'yellow'
+      }
+      if(color === 'green'){
+          div.style.backgroundColor = 'green'
+      }
+      if(color === 'blue'){
+          div.style.backgroundColor = 'blue'
+      }
+
+      div.setAttribute('class', 'divs')
+
+      box.appendChild(div)
+
+  }
+  function sell(x){
+      let temp = x.parentNode.parentNode
+      temp.parentNode.removeChild(temp)
+      total_sold()
+  }
+
+  function total_sold(){
+      let width = document.getElementById("width").value
+      let height = document.getElementById("height").value
+      let color = document.getElementById("color").value
+      let price_to_add = total_price(width, height, color)
+
+      let sum = document.getElementById("total").innerHTML
+      sum = parseInt(sum) + price_to_add
+      document.getElementById("total").innerHTML = sum
+
+  }
+  function update_card(id, width, height, color){
+      let array = document.getElementsByClassName('ids')
+      for (let i=0; i<array.length; i++){
+          if(id === array[i].innerHTML){
+              let divToUpdate = array[i].parentNode.parentNode;
+
+              let price = total_price(width, height, color)
+              divToUpdate.querySelector('p:nth-child(2)').textContent = `Width: ${width}`;
+              divToUpdate.querySelector('p:nth-child(3)').textContent = `Height: ${height}`;
+              divToUpdate.querySelector('p:nth-child(4)').textContent = `Color: ${color}`;
+              divToUpdate.querySelector('p:nth-child(5)').textContent = `Total price: ${price}`;
+
+              if (color === 'red') {
+                  divToUpdate.style.backgroundColor = 'red';
+              } else if (color === 'yellow') {
+                  divToUpdate.style.backgroundColor = 'yellow';
+              } else if (color === 'green') {
+                  divToUpdate.style.backgroundColor = 'green';
+              } else if (color === 'blue') {
+                  divToUpdate.style.backgroundColor = 'blue';
+              }
+              break;
+          }
+      }
+  }
+</script>
+</body>
+</html>

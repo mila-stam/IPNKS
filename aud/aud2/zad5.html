@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+  <script>
+    var osnova = prompt("Vnesete ja osnovata");
+    var stepen = prompt("Vnesete go eksponentot");
+    osnova = parseInt(osnova);
+    stepen = parseInt(stepen);
+
+    var suma = 1;
+    for (i = 0; i <stepen; i++){
+        suma *= osnova;
+    }
+    console.log("rezultatot e " + suma);
+  </script>
+</body>
+</html>

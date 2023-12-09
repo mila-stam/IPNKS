@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <style>
+    table{
+        border-collapse: collapse;
+    }
+    th, td{
+        border: 1px solid black;
+        padding: 5px;
+    }
+  </style>
+</head>
+<body>
+<h1>Online Classes</h1>
+<div>
+  <label>Name and surname</label>
+  <input type="text" id="name">
+</div>
+
+<div>
+  <label>E-mail</label>
+  <input type="text" id="email">
+</div>
+
+<div>
+  <label>Age</label>
+  <input type="text" id="age">
+</div>
+
+<div>
+  <label>Username</label>
+  <input type="text" id="username">
+</div>
+
+<div>
+  <label>Password</label>
+  <input type="text" id="password">
+</div>
+
+<div>
+  <label>Role</label>
+  <select id="role">
+    <option>teacher</option>
+    <option>student</option>
+  </select>
+</div>
+
+<input type="button" value="ADD" onclick="addPerson()">
+
+<div>
+  <p>Available teachers: <span id="tot">0</span></p>
+</div>
+
+<h2>Users</h2>
+
+<table id="table">
+  <thead>
+  <th>Name</th>
+  <th>Username</th>
+  <th>Email</th>
+  <th>Age</th>
+  <th>Role</th>
+  <th>Actions</th>
+  </thead>
+
+  <tbody>
+
+  </tbody>
+</table>
+
+
+<script>
+    function findUsername(username){
+        let array = document.getElementsByClassName('usernames')
+        for (let i=0; i<array.length; i++){
+            if(username === array[i].innerHTML){
+                return true
+            }
+        }
+        return false
+    }
+
+    function isCapital(char){
+        return /^[A-Z]$/.test(char)
+    }
+    function checkPass(pass){
+        if(pass.length < 10){
+            return false
+        }
+        let flagNum=0, flagLetter=0;
+        for (let i=0; i<pass.length; i++){
+            if(!isNaN(pass.charAt(i))){
+                flagNum=1
+            }
+            if (isCapital(pass.charAt(i))){
+                flagLetter=1
+            }
+        }
+        return !(flagLetter === 0 && flagNum === 0);
+    }
+  function addPerson(){
+      let tempRow = document.getElementById("table").getElementsByTagName("tbody")[0]
+
+      let name = document.getElementById("name").value
+      let email = document.getElementById("email").value
+      let age = document.getElementById("age").value
+      let username = document.getElementById("username").value
+      let password = document.getElementById("password").value
+      let role = document.getElementById("role").value
+
+      if (!name || !email || !age || !username || !password || !role){
+          alert("Fill everything");
+      }
+
+      if(findUsername(username)){
+          alert("Username exists")
+          return
+      }
+
+      if(!checkPass(password)){
+          alert("Invalid password, must be 10 characters and contain 1 capital letter and 1 number")
+      }
+
+      if(age < 18 && role === 'teacher'){
+          alert("Invalid role");
+          return
+      }
+      let newRow = tempRow.insertRow(tempRow.rows.length);
+
+      let nameCell = newRow.insertCell(0)
+      let usernameCell = newRow.insertCell(1)
+      usernameCell.setAttribute('class', 'usernames')
+      let emailCell = newRow.insertCell(2)
+      let ageCell = newRow.insertCell(3)
+      let roleCell = newRow.insertCell(4)
+      let actionsCell = newRow.insertCell(5)
+
+      nameCell.innerHTML = name;
+      usernameCell.innerHTML = username;
+      emailCell.innerHTML = email;
+      ageCell.innerHTML = age;
+      roleCell.innerHTML = role;
+
+      let button = document.createElement("button")
+      button.textContent = `Hire`
+      button.onclick = function (){
+          hire(this);
+      }
+      if(role === 'teacher'){
+          actionsCell.appendChild(button)
+          newRow.style.backgroundColor = 'lightgreen'
+      } else{
+          newRow.style.backgroundColor = 'lightblue'
+      }
+
+  }
+
+  function hire(x){
+      let temp = x.parentNode.parentNode
+      temp.style.backgroundColor = 'gray'
+
+      let temp1= x.parentNode
+      temp1.removeChild(x)
+
+      avl_teachers()
+  }
+
+  function avl_teachers(){
+      let total = document.getElementById("tot").innerHTML
+      document.getElementById("tot").innerHTML = parseInt(total)+1
+  }
+</script>
+</body>
+</html>

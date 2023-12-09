@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <style>
+    li{
+        width: 300px;
+    }
+  </style>
+</head>
+<body>
+<h3>Регистрирај лет</h3>
+
+<div>
+  <label>Име и презиме</label>
+  <input type="text" id="ime">
+</div>
+
+<div>
+  <label>Ознака на летало</label>
+  <input type="text" id="oznaka">
+</div>
+
+<div>
+  <label>Координати на лет</label>
+  <input type="text" id="koordinati">
+</div>
+
+<div>
+  <label>Радиус на лет</label>
+  <input type="text" id="radius">
+</div>
+
+<div>
+  <label>Висина на лет</label>
+  <input type="text" id="visina">
+</div>
+
+<div>
+  <label>Тип на летало</label>
+  <select id="tip">
+    <option>Едрилица</option>
+    <option>Дрон</option>
+  </select>
+</div>
+
+<input type="button" value="Најави" onclick="najava()">
+
+<h3>Регистрирани летови</h3>
+<h5>Вкупно најавени летови: <span id="total">0</span></h5>
+
+<ul id="lista">
+
+</ul>
+
+<script>
+  function najava(){
+      let ime = document.getElementById("ime").value
+      let oznaka = document.getElementById("oznaka").value
+      let koordinati = document.getElementById("koordinati").value
+      let radius = document.getElementById("radius").value
+      let visina = document.getElementById("visina").value
+      let tip = document.getElementById("tip").value
+
+      if (!ime || !oznaka || !koordinati || !radius || !visina || !tip){
+          alert("Пополнете ги сите полиња")
+          return
+      }
+      //0123456789 10
+      //Z3-UNR-1234
+      let prv_del_oznaka = oznaka.substring(0, 7)
+      let brojki_ozanka = oznaka.substring(7)
+
+      if(prv_del_oznaka !== 'Z3-UNR-' || brojki_ozanka.length !== 4){
+          alert("Невалидна ознака1")
+          return;
+      } else{
+          if(isNaN(parseInt(brojki_ozanka[0])) || isNaN(parseInt(brojki_ozanka[1])) || isNaN(parseInt(brojki_ozanka[2])) || isNaN(parseInt(brojki_ozanka[3]))){
+              alert("Невалидна ознака2")
+              return;
+          }
+      }
+
+      if(radius > 500 || visina > 150){
+          let num = brojki_ozanka[0]
+          if(!(brojki_ozanka[1] === num && brojki_ozanka[2] === num && brojki_ozanka[3] === num)){
+              alert("Невалидна ознака2")
+              return;
+          }
+      }
+
+
+      let box = document.getElementById("lista")
+
+      let p1 = document.createElement("p")
+      p1.textContent = `${ime}, ${oznaka}`
+
+      let p2 = document.createElement("p")
+      p2.textContent = `Радиус: ${radius}, Висина: ${visina}`
+
+      let p3 = document.createElement("p")
+      p3.textContent= `${tip}`
+
+      //<button onclick="potvrdi()">potvrdi</button>
+      let p4 =document.createElement("p")
+      let kopche = document.createElement("button")
+      kopche.onclick = function() { potvrdi(this); };
+      kopche.textContent = `потврди`
+      p4.append(kopche)
+
+      let kopche1 = document.createElement("button")
+      kopche1.onclick = function() { otkazhi(this); };
+      kopche1.textContent = `откажи`
+      p4.append(kopche1)
+
+
+      let list_item = document.createElement("li")
+      list_item.append(p1)
+      list_item.append(p2)
+      list_item.append(p3)
+      list_item.append(p4)
+
+
+
+      if (tip === 'Едрилица'){
+          list_item.style.border = '1px solid black'
+      } else if(tip === 'Дрон'){
+          if(radius === visina){
+              list_item.style.border = '1px solid black'
+          }
+      }
+
+      box.appendChild(list_item)
+
+      document.getElementById("ime").value = ""
+      document.getElementById("oznaka").value = ""
+      document.getElementById("koordinati").value =""
+      document.getElementById("radius").value =""
+      document.getElementById("visina").value=""
+      update_count(1)
+  }
+
+  function potvrdi(x){
+      let temp = x.parentNode.parentNode
+      temp.style.backgroundColor = 'lightgreen'
+  }
+
+  function otkazhi(x){
+    let temp= x.parentNode.parentNode
+      temp.parentNode.removeChild(temp)
+      update_count(0)
+  }
+
+  function update_count(x){
+      let current = parseInt(document.getElementById("total").innerText)
+      if(x===1){
+          document.getElementById("total").innerHTML = current + 1
+      } else if (x===0){
+          document.getElementById("total").innerHTML = current - 1
+      }
+
+  }
+</script>
+</body>
+</html>

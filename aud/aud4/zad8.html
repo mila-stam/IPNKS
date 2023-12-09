@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<script>
+  function snip(string, char, type){
+      let index = string.indexOf(char)
+      if(type === 'a'){
+          return string.slice(0, index);
+      } else if(type === 'b'){
+          return string.slice(index+1)
+      } else return string
+  }
+
+  console.log(snip('w3resource: JavaScript Exercises', ':','a'));
+  console.log(snip('w3resource: JavaScript Exercises', 'E','b'));
+</script>
+</body>
+</html>

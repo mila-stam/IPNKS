@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+
+<p>Paragraph 1</p>
+<p>Paragraph 2</p>
+<p>Paragraph 1</p>
+<p>Paragraph 2</p>
+<p>Paragraph 1</p>
+<p>Paragraph 2</p>
+<input type="button" value="CLICK TO CHANGE COLOR" onclick="backgroundColor()">
+
+<script type="text/javascript">
+  function backgroundColor(){
+      let docBody = document.getElementsByTagName("body")[0];
+      let myBodyElements = docBody.getElementsByTagName("p"); //niza od site paragrafi
+      /*let myP1 = myBodyElements[0];
+      myP1.style.background = "red"
+      let myP2 = myBodyElements[1];
+      myP2.style.background = "green"*/
+
+      for (i=0; i<myBodyElements.length; i++){
+          let myP = myBodyElements[i];
+          if(i%2==0){
+              myP.style.background = "red"
+          } else myP.style.background = "green"
+
+      }
+  }
+</script>
+</body>
+</html>
