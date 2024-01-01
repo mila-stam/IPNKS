@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>zadacha 2</title>
+</head>
+<body>
+  <script>
+    var phone = prompt("Vnesete telefonski broj vo format XXYYYZZZ");
+    console.log("0" + phone.substring(0,2) + "/" + phone.substring(2, 5) + "-" + phone.substring(5));
+    if(parseInt(phone.charAt(1)) === 0 || parseInt(phone.charAt(1)) === 1 || parseInt(phone.charAt(1)) === 2){
+        console.log("T-Mobile");
+    } else if(parseInt(phone.charAt(1)) === 5 || parseInt(phone.charAt(1)) === 6){
+        console.log("One");
+    } else console.log("Vip");
+
+  </script>
+</body>
+</html>
