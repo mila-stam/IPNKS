@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<div>
+  <label for="items">Items</label>
+  <input id="items" type="text">
+</div>
+
+<div>
+  <label for="type">Type</label>
+  <select id="type">
+    <option value="radio">Radio button</option>
+    <option value="checkbox">Check box</option>
+  </select>
+</div>
+
+<input type="button" value="Show" onclick="show()">
+
+<div id="box">
+
+</div>
+<script>
+    function show(){
+        let items = document.getElementById("items").value
+        let array = items.split(", ")
+        let n = array.length
+        n = parseInt(n)
+
+        let kind = document.getElementById("type").value
+
+        let container = document.getElementById("box")
+        container.innerHTML = "";
+
+        for (let i=0; i<n; i++){
+            let element = document.createElement("input")
+            element.setAttribute('type', kind)
+
+            let data = document.createTextNode(array[i])
+
+            container.appendChild(element)
+            container.appendChild(data)
+        }
+    }
+
+</script>
+</body>
+</html>

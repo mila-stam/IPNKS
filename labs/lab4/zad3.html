@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<h1>Change of background</h1>
+
+<div>
+  <input type="radio" value="color" name="type">color
+  <input type="radio" value="image" name="type">image
+</div>
+
+<div>
+  <label for="value">Value</label>
+  <input id="value" type="text">
+</div>
+
+<input type="button" value="Change" onclick="change()">
+
+<script>
+function change(){
+    let type = document.querySelector('input[name="type"]:checked').value
+    let value = document.getElementById("value").value
+
+    if (type === 'color'){
+        document.body.style.backgroundColor = value
+    } else{
+        document.body.style.backgroundImage = `url('${value}')`;
+    }
+}
+</script>
+</body>
+</html>

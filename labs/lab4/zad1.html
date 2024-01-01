@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <style>
+      table {
+          border-collapse: collapse;
+      }
+
+      th, td {
+          border: 1px solid black;
+          padding: 5px;
+      }
+  </style>
+</head>
+<body>
+<h1>Forma za vnesuvanje oceni</h1>
+
+<div>
+  <label for="name">Ime</label>
+  <input type="text" id="name">
+</div>
+
+<div>
+  <label for="surname">Prezime</label>
+  <input type="text" id="surname">
+</div>
+
+<div>
+  <label for="index">Index</label>
+  <input type="text" id="index">
+</div>
+
+<div>
+  <label for="subject">Predmet</label>
+  <input type="text" id="subject">
+</div>
+
+<div>
+  <label for="grade">Ocena</label>
+  <select id="grade">
+    <option>5 (pet)</option>
+    <option>6 (shest)</option>
+    <option>7 (sedum)</option>
+    <option>8 (osum)</option>
+    <option>9 (devet)</option>
+    <option>10 (deset)</option>
+  </select>
+</div>
+
+<input type="button" value="Vnesi" onclick="add()">
+
+<table id="table">
+  <thead>
+  <th>Ime</th>
+  <th>Prezime</th>
+  <th>Indeks</th>
+  <th>Predmet</th>
+  <th>Ocena</th>
+  </thead>
+
+  <tbody>
+
+  </tbody>
+</table>
+
+<script>
+    let dataArray = [];
+
+    function add(){
+
+      let name = document.getElementById("name").value
+      let surname = document.getElementById("surname").value
+      let index = document.getElementById("index").value
+      let subject = document.getElementById("subject").value
+      let grade = document.getElementById("grade").value
+
+      let dataObject = {
+          name: name,
+          surname: surname,
+          index: index,
+          subject: subject,
+          grade: grade
+      };
+
+      dataArray.push(dataObject);
+
+      let tempRow = document.getElementById("table").getElementsByTagName("tbody")[0];
+      let newRow = tempRow.insertRow(tempRow.rows.length);
+
+      for (let key in dataObject) {
+          let cell = newRow.insertCell();
+          cell.innerHTML = dataObject[key];
+      }
+  }
+</script>
+</body>
+</html>
