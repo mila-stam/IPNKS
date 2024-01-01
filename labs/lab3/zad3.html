@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<script>
+    function CustomCylinder(customRadius, customHeight) {
+        this.customRadius = customRadius;
+        this.customHeight = customHeight;
+    }
+
+    CustomCylinder.prototype.calculateCustomVolume = function () {
+        var customVolume = Math.PI * Math.pow(this.customRadius, 2) * this.customHeight;
+        return customVolume;
+    };
+
+    var myCustomCylinder = new CustomCylinder(4, 6);
+    var customCylinderVolume = myCustomCylinder.calculateCustomVolume();
+    console.log("Custom Cylinder Volume is:", customCylinderVolume);
+
+</script>
+</body>
+</html>

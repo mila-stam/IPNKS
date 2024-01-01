@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<script>
+    function izbrisi(arr, n) {
+        var cuvaj = arr.filter(function (value) {
+            return value !== n;
+        });
+
+        return cuvaj;
+    }
+
+    var prva = [2, 5, 9, 6];
+    var n = 5;
+    console.log(remove(prva, n));
+
+</script>
+</body>
+</html>

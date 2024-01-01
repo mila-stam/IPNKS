@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<script>
+    var myLibrary = [
+        {bookTitle: "Orkanski Visovi", bookAuthor: "E.Bronte", hasRead: true},
+        {bookTitle: "The Lord of the Rings", bookAuthor: "J.R.R. Tolkien", hasRead: false},
+    ];
+
+    for (var i = 0; i < myLibrary.length; i++) {
+        var currentBook = myLibrary[i];
+
+        if (currentBook.hasRead) {
+            console.log('You already read "' + currentBook.bookTitle + '" by ' + currentBook.bookAuthor + '.');
+        } else {
+            console.log('You still need to read "' + currentBook.bookTitle + '" by ' + currentBook.bookAuthor + '.');
+        }
+    }
+
+
+</script>
+</body>
+</html>

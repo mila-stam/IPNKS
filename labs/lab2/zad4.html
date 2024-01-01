@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <style>
+    #container{
+        width: 200px;
+    }
+    input{
+        width: 50px;
+    }
+  </style>
+</head>
+<body>
+
+<div id="container">
+  <div>
+    <label for="real1"></label>
+    <input type="text" id="real1">
+    <label for="imag1"></label>
+    <input type="text" id="imag1">i
+  </div>
+
+  <div>
+    <label for="real2"></label>
+    <input type="text" id="real2">
+    <label for="imag2"></label>
+    <input type="text" id="imag2">i
+  </div>
+
+  <button onclick="add()">Add</button>
+
+  <div>
+    <label for="resultReal"></label>
+    <input type="text" id="resultReal">
+    <label for="resultImag"></label>
+    <input type="text" id="resultImag">i
+  </div>
+</div>
+
+<script>
+    function add(){
+        let real1 = parseFloat(document.getElementById("real1").value) || 0
+        let imag1 = parseFloat(document.getElementById("imag1").value) || 0
+        let real2 = parseFloat(document.getElementById("real2").value) || 0
+        let imag2 = parseFloat(document.getElementById("imag2").value) || 0
+
+        let resultReal = real1 + real2
+        let resultImag = imag1 + imag2
+
+        document.getElementById("resultReal").value = resultReal
+        document.getElementById("resultImag").value = resultImag
+    }
+</script>
+</body>
+</html>

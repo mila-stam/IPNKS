@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<h1>About Me</h1>
+<ul>
+  <li>Name: <span id="name"></span>
+  <li>Surname: <span id="surname"></span>
+  <li>Hometown: <span id="hometown"></span>
+</ul>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        document.body.style.fontFamily = "Arial";
+
+        document.getElementById("name").innerText = "Mila";
+        document.getElementById("surname").innerText = "Stamatovska";
+        document.getElementById("hometown").innerText = "Skopje";
+
+        let listItems = document.querySelectorAll("li");
+        for (let i = 0; i < listItems.length; i++) {
+            listItems[i].style.backgroundColor = "red";
+        }
+    });
+</script>
+</body>
+</html>

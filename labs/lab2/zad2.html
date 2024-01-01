@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<button onclick="showImg()">Show Random Image</button>
+
+<div id="container">
+
+</div>
+
+<script>
+  function showImg(){
+      let urls = [
+          "https://designmodo.com/wp-content/uploads/2014/07/free-photos.jpg",
+          "https://farm5.staticflickr.com/4060/4567292488_5d3f4b05f6_z.jpg",
+          "https://wallup.net/wp-content/uploads/2017/03/28/401266-landscape-road-forest-748x421.jpg"
+      ]
+
+      let randomNum = Math.floor(Math.random() * urls.length)
+      let container = document.getElementById("container")
+      let img = document.createElement("img")
+      img.src = urls[randomNum]
+      container.innerHTML=""
+      container.appendChild(img)
+  }
+</script>
+</body>
+</html>
